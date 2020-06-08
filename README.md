@@ -1,39 +1,29 @@
-# node-js-getting-started
+# LINEで文字数をカウントしてくれるだけのともだちをつくる
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+## ともだち召喚の背景
 
-This application supports the [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+６月になり、各企業さんが夏季インターンの募集を初めています。私も今年からインターンに参加しようと思っていますが、ES作成がとっても不安な私は先輩にESの添削をお願いしました。
 
-## Running Locally
+LINEで先輩に文章を送って見てもらうのですが、困ったことがありました。ESにはだいたい文字数制限があるのです。（しかもギリギリまで書くのが推奨されているらしい）
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+制限文字数ちょうどで書いた文章を添削してもらうとき、先輩に直された文章が文字数を超過していたらいたたまれない気持ちになります。もうちょっと減らしてもらえますか？なんて言えたもんじゃないです。
 
-```sh
-$ git clone https://github.com/heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
+また、文字数を数えること自体もそれはそれで面倒です。ESの形式によっては数えてくれるものもありますが、大抵私はWordに貼り付けて文字数をかぞえていました。面倒です。
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+そこで、カウント係の友達をもう一人トークに招待し、文章の文字数を数えてもらうことを思いつきました。が、そんな都合のいい友達はいません。よって、LineBOTを召喚します。
 
-## Deploying to Heroku
+## 環境
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
+せっかくなので、研究に必要で勉強している最中のNode.jsを使ってみることにします。Herokuを使えばlineBotを簡単に作れそうです。
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+- Heroku
+- Node.js
 
-## Documentation
+## 参考
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+[LINE BOTをHeroku + Node.jsでやるまで](https://qiita.com/TakuTaku04/items/cb71f10669a9e9cbf71b)
 
-- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+超分かり易かったです。手順に従って簡単にLINEBOTを作成できました。ありがとうございます。
+
+## できたともだち
+
