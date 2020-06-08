@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 5000
 const line = require('@line/bot-sdk')
 
 const config = {
-    channelAccessToken: process.env.ACCESS_TOKEN
+    channelAccessToken: process.env.ACCESS_TOKEN,
     channelSecret: process.env.SECRET_KEY
 };
 
