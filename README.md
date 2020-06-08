@@ -25,7 +25,11 @@ LINEで先輩に文章を送って見てもらうのですが、困ったこと�
 
 超分かり易かったです。手順に従って簡単にLINEBOTを作成できました。ありがとうございます。
 
-## lineBot()
+## 実装
+
+上の記事を参考にして、echomanのところをkazoerukunとして実装しました。
+
+### lineBot()
 
 /hook を呼び出すとこの関数を呼ぶようにする。
 
@@ -43,9 +47,8 @@ function lineBot(req, res) {
     }
 ```
 
-## kazoerukun()
-
-### テキストを取得して文字数を返すだけ
+### kazoerukun()
+テキストを取得して文字数を返すだけ
 
 ```javascript
 async function kazoerukun(ev) {
@@ -62,4 +65,65 @@ async function kazoerukun(ev) {
 
 ずっとカウントしてくると、いちいち文字数を返してくるかぞえるくんにイライラします。
 
-状態を保存する変数を用意して、切り替えられるようにします。
+状態を保存する変数を用意して、切り替えられるようにしました。
+
+
+
+### kazoerukun()
+
+publicディレクトリ にisCountOn.txtを用意して、毎回読み込むことにしました。もっといい方法がありそうですが…
+
+```javascript
+async function kazoerukun(ev) {
+        const isCountOn = fs.readFileSync('public/isCountOn.txt')
+        if (ev.message.text == 'かぞえて') {
+            switchMode(ev, 'on')
+        } else if (ev.message.text == 'やめて') {
+            switchMode(ev, 'off')
+        } else if (isCountOn == 'true') {
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `${ev.message.text.length}もじ`
+            })
+        }
+    }
+```
+
+### switchMode()
+
+切り替えのために、ファイルの書き換えを行っています。
+
+```javascript
+function switchMode(ev, mode) {
+        if (mode == 'on') {
+            fs.writeFileSync('public/isCountOn.txt', 'true')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `かぞえるよ`
+            })
+        }else if (mode == 'off') {
+            fs.writeFileSync('public/isCountOn.txt', 'false')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `やめるよ`
+            })
+        }
+    }
+```
+
+## できたともだち
+
+こんなふうに使えます。
+
+![S__52019555](/Users/Taiga/Downloads/S__52019555.jpg)
+
+これを先輩とのトークルームに招待して使っていきます。便利！　　
+
+
+
+## 感想
+
+LINEBOTを作ったのは初めてでしたが、先駆者の皆様方のおかげで簡単に作ることができました。他にもいろいろなことができそうなので、何か思いついたら作ってみます。
+
+
+
