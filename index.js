@@ -36,8 +36,10 @@ express()
 
     async function kazoerukun(ev) {
         const isCountOn = fs.readFileSync('public/isCountOn.txt')
+        console.log('-----------------')
         console.log(isCountOn)
-        if (isCountOn) {
+        console.log('-----------------')
+        if (isCountOn == 'true') {
             return client.replyMessage(ev.replyToken, {
                 type: 'text',
                 text: `${ev.message.text.length}もじ`
