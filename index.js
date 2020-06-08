@@ -38,8 +38,21 @@ express()
         const isCountOn = fs.readFileSync('public/isCountOn.txt')
         console.log('-----------------')
         console.log(isCountOn)
+        console.log(isCountOn == 'true')
         console.log('-----------------')
-        if (isCountOn == 'true') {
+        if (ev.message.text == 'かぞえて') {
+            console.log('かぞえるよ')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `かぞえるよ`
+            })
+        } else if (ev.message.text == 'やめて') {
+            console.log('やめるよ')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `やめるよ`
+            })
+        } else if (isCountOn == 'true') {
             return client.replyMessage(ev.replyToken, {
                 type: 'text',
                 text: `${ev.message.text.length}もじ`
