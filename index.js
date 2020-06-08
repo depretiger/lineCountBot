@@ -36,22 +36,10 @@ express()
 
     async function kazoerukun(ev) {
         const isCountOn = fs.readFileSync('public/isCountOn.txt')
-        console.log('-----------------')
-        console.log(isCountOn)
-        console.log(isCountOn == 'true')
-        console.log('-----------------')
         if (ev.message.text == 'かぞえて') {
-            console.log('かぞえるよ')
-            return client.replyMessage(ev.replyToken, {
-                type: 'text',
-                text: `かぞえるよ`
-            })
+            switchMode(ev, 'on')
         } else if (ev.message.text == 'やめて') {
-            console.log('やめるよ')
-            return client.replyMessage(ev.replyToken, {
-                type: 'text',
-                text: `やめるよ`
-            })
+            switchMode(ev, 'off')
         } else if (isCountOn == 'true') {
             return client.replyMessage(ev.replyToken, {
                 type: 'text',
@@ -59,6 +47,23 @@ express()
             })
         }
     }
+
+    function switchMode(ev, mode) {
+        if (mode == 'on') {
+            fs.writeFileSync('public/isCountOn.txt', 'true')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `かぞえるよ`
+            })
+        }else if (mode == 'off') {
+            fs.writeFileSync('public/isCountOn.txt', 'false')
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `やめるよ`
+            })
+        }
+    }
+
 
 
 
