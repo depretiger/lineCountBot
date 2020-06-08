@@ -27,6 +27,7 @@ express()
         const promises = [];
         for (let i = 0, l = events.length; i < l; i++) {
             const ev = events[i];
+            console.log(ev)
             promises.push(
                 kazoerukun(ev)
             )
@@ -34,7 +35,6 @@ express()
     }
 
     async function kazoerukun(ev) {
-        const pro = await client.getProfile(ev.source.userId);
         return client.replyMessage(ev.replyToken, {
             type: 'text',
             text: `${ev.message.text.length}もじ`
