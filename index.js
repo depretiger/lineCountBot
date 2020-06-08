@@ -7,6 +7,7 @@ const config = {
     channelAccessToken: process.env.ACCESS_TOKEN,
     channelSecret: process.env.SECRET_KEY
 };
+const client = new line.Client(config);
 
 express()
     .use(express.static(path.join(__dirname, 'public')))
@@ -22,6 +23,22 @@ express()
 
     function lineBot(req, res) {
         res.status(200).end();
-        res.json({test: 'hook'});
-        console.log('pass');
+        const events = req.body.events;
+        const promises = [];
+        for (let i = 0, l = events.length; i < l; i++) {
+            const ev = events[i];
+            promises.push(
+                kazoerukun(ev)
+            )
+        }
     }
+
+    async function kazoerukun(ev) {
+        const pro = await client.getProfile(ev.source.userId);
+        return client.replyMessage(ev.replyToken, {
+            type: 'text',
+            text: `${ev.message.text.length}もじ`
+        })
+    }
+
+
