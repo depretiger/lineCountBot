@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 const PORT = process.env.PORT || 5000
 const line = require('@line/bot-sdk')
 
@@ -27,7 +28,6 @@ express()
         const promises = [];
         for (let i = 0, l = events.length; i < l; i++) {
             const ev = events[i];
-            console.log(ev)
             promises.push(
                 kazoerukun(ev)
             )
@@ -35,10 +35,16 @@ express()
     }
 
     async function kazoerukun(ev) {
-        return client.replyMessage(ev.replyToken, {
-            type: 'text',
-            text: `${ev.message.text.length}もじ`
-        })
+        const isCountOn = fs.readFileSync('/isCountOn.txt')
+        console.log(isCountOn)
+        if (isCountOn) {
+            return client.replyMessage(ev.replyToken, {
+                type: 'text',
+                text: `${ev.message.text.length}もじ`
+            })
+        }
     }
+
+
 
 
